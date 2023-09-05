@@ -6,6 +6,7 @@ app.use(express.json())
 
 app.use('/users', userRouter)
 app.use('/auth', authRouter)
+app.use('/')
 
 export default app
 
@@ -23,7 +24,6 @@ export default app
 // const app = express()
 // app.use(cors());
 // app.use(express.json());
-
 // app.use('/users', userRouter)
 // app.use('/auth', authRouter)
 
