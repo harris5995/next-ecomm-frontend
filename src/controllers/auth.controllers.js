@@ -2,12 +2,15 @@ import express from 'express'
 import bcrypt from "bcryptjs"
 import { Prisma } from "@prisma/client"
 import prisma from "../utils/prisma.js"
-import { validateUser } from "../validators/users.js"
 import { filter } from "../utils/common.js"
+import { validateLogin } from '../validators/auth.js'
+import { signAccessToken } from '../utils/jwt.js'
+
 const router = express.Router()
 
 //Create POST /signin endpoint that takes a user's email and password as its JSON body.
 router.post('/auth', async (req, res) => {
+  console.log('Received authentication request:', req.body);
     const data = req.body
   
     const validationErrors = validateLogin(data)
@@ -33,7 +36,10 @@ router.post('/auth', async (req, res) => {
   
     const userFiltered = filter(user, 'id', 'name', 'email')
     const accessToken = await signAccessToken(userFiltered)
+    console.log('Sending response:', response);
     return res.json({ accessToken })
-  })
+  });
+
+
   
   export default router

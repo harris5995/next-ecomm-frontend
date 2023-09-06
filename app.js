@@ -1,6 +1,7 @@
 import express from "express"
 import userRouter from "./src/controllers/users.controllers.js"
 import authRouter from "./src/controllers/auth.controllers.js"
+
 const app = express()
 app.use(express.json())
 

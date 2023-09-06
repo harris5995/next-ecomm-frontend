@@ -6,6 +6,9 @@ import { validateUser } from "../validators/users.js"
 import { filter } from "../utils/common.js"
 const router = express.Router()
 
+//Registers new user (add new user info to users table)
+//Works using Insomnia
+//Need to connect with front-end login page button
 router.post('/', async (req, res) => {
   const data = req.body
 
@@ -33,6 +36,13 @@ router.post('/', async (req, res) => {
     }
     throw err
   })
+})
+
+//Get all users
+//Doesn't work
+router.get('/users', async (req, res) => {
+  const allUsers = await prisma.user.findMany()
+  res.json(allUsers)
 })
 
 export default router
