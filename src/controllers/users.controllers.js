@@ -36,11 +36,12 @@ router.post('/', async (req, res) => {
     }
     throw err
   })
-})
+});
 
 router.get('/', async (req,res) =>{
   const allUsers = await prisma.user.findMany()
   res.json(allUsers)
 })
 
+//To do: Create a new user endpoint that allows to delete user from user table
 export default router
