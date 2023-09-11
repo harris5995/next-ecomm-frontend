@@ -1,5 +1,11 @@
 import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
 
+//Store added for Logged in below
+import { writable } from 'svelte/store';
+import { goto } from '$app/navigation'
+export const LoggedIn = writable(false)
+//End of store
+
 const emptyAuth = {
   "token": "",
   "userId": ""
@@ -7,6 +13,8 @@ const emptyAuth = {
 
 export function logOut() {
   localStorage.setItem("auth", JSON.stringify(emptyAuth));
+  LoggedIn.set(false)
+  goto('/')
   return true
 }
 
@@ -52,6 +60,8 @@ export async function isLoggedIn() {
         "userId": res.record.id
       }));
 
+      LoggedIn.set(true)
+
       return true
     }
 
@@ -63,7 +73,7 @@ export async function isLoggedIn() {
 
 export async function authenticateUser(email, password) {
   const resp = await fetch(
-    PUBLIC_BACKEND_BASE_URL + '/sign-in',
+    PUBLIC_BACKEND_BASE_URL + '/auth',
     {
       method: 'POST',
       mode: 'cors',
@@ -81,15 +91,18 @@ export async function authenticateUser(email, password) {
 
   if (resp.status == 200) {
     localStorage.setItem("auth", JSON.stringify({
-      "token": res.token,
-      "userId": res.record.id
+      "token": res.accessToken,
     }));
 
+    LoggedIn.set(true)
+    
     return {
       success: true,
       res: res
     }
   }
+
+ 
 
   return {
     success: false,

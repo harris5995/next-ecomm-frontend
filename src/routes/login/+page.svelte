@@ -15,6 +15,7 @@
           goto('/');
   
         } else {
+          console.log(err)
         }
       }
   </script>
@@ -26,7 +27,7 @@
         <label class="block text-gray-700 text-sm font-semibold mb-2" for="email">
           Email
         </label>
-        <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="username" type="text" placeholder="johndoe">
+        <input class="shadow appearance-none border rounded-lg w-full py-2 px-3 text-white leading-tight focus:outline-none focus:shadow-outline" id="email" type="text" placeholder="johndoe">
       </div>
   
       <div class="mb-6">
@@ -38,10 +39,7 @@
   
       <div class="flex items-center justify-center">
         <button
-          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-10 rounded-lg focus:outline-none focus:shadow-outline"
-          
-        >
-          
+          class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-10 rounded-lg focus:outline-none focus:shadow-outline">
           Sign In
         </button>
       </div>
