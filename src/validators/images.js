@@ -1,4 +1,4 @@
-export function validateItem(input) {
+export function validateImages(input) {
 
     //item_id, user, user_id, title, description, price
     const validationErrors = {}

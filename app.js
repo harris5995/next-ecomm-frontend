@@ -1,7 +1,7 @@
 import express from "express"
 import userRouter from "./src/controllers/users.controllers.js"
 import authRouter from "./src/controllers/auth.controllers.js"
-import itemRouter from "./src/controllers/items.controllers.js"
+import imagesRouter from "./src/controllers/images.controllers.js"
 import auth from "./src/middlewares/auth.js" 
 import cors from "cors"
 import morgan from "morgan"
@@ -14,7 +14,7 @@ app.use(cors());
 
 app.use('/user', userRouter)
 app.use('/auth', authRouter)
-app.use('/item', itemRouter)
+app.use('/images', imagesRouter)
 
 
 
