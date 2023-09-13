@@ -12,15 +12,14 @@ app.use(express.json());
 app.use(morgan('combined'));
 app.use(cors());
 
-app.use('/user', userRouter)
+app.use('/users', userRouter)
 app.use('/auth', authRouter)
 app.use('/images', imagesRouter)
 
 
 
 app.get('/protected', auth, (req, res) => {
-    res.json({ "hello": "world" })
-  })
+    res.json({ "hello": "world" })})
 
 export default app
 
