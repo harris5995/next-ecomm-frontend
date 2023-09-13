@@ -1,6 +1,8 @@
 <script>
 	import { getUserId, LoggedIn } from '../../../lib/auth.js';
     import { getTokenFromLocalStorage } from '../../../lib/auth.js';
+    import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public'
+    import { goto } from '$app/navigation';
 
     export let data;
 
@@ -12,7 +14,7 @@
 
         // try {
             console.log(1)
-            const response = await fetch(`/images/${data.images.id}`, {
+            const response = await fetch(PUBLIC_BACKEND_BASE_URL + `/images/${data.images.id}`, {
                 method: 'DELETE',
                 mode: 'cors',
                 headers: {
@@ -23,7 +25,7 @@
                 })
         // },
             console.log(2)
-            if (response.ok) {
+            if (response.status == 200) {
                 goto('/');
             }
         // } catch (error) {
