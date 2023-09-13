@@ -11,18 +11,13 @@
   async function createUser(evt) {
     evt.preventDefault()
 
-    // if (evt.target['password'].value != evt.target['password-confirmation'].value) {
-    //   formErrors['password'] = { message: 'Password confirmation does not match' };
-    //   return;
-    // }
-
     const userData = {
       name: evt.target['name'].value,
       email: evt.target['email'].value,
       password: evt.target['password'].value,
     };
 
-    const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/user', {
+    const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/users', {
       method: 'POST',
       mode: 'cors',
       headers: {

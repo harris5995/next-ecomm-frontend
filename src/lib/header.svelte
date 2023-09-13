@@ -10,7 +10,7 @@
 <nav class="bg-gray-900 text-white p-4 flex justify-between items-center">
 
   <a href="/" class=" text-3xl rounded-full px-4 py-2 font-semibold btn-accent">
-    Harris Photos
+    NEXT Photos
   </a>
   
   <div class="flex-1"></div>

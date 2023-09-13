@@ -26,6 +26,9 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"morgan": "^1.10.0"
+		"humanize-plus": "^1.8.2",
+		"morgan": "^1.10.0",
+		"stripe": "^13.5.0",
+		"svelte-markdown": "^0.4.0"
 	}
 }

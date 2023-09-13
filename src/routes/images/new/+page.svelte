@@ -1,3 +1,7 @@
+<svelte:head>
+  <script src="/aws-sdk-s3.min.js"></script>
+</svelte:head>
+
 <script>
     import { PUBLIC_BACKEND_BASE_URL } from '$env/static/public';
     let formErrors = {};
@@ -9,7 +13,6 @@
     // import { statusSpinner } from '../../../lib/spinner';
 
     function postSignUp() {
-        //image usccess alert
         goto('/');
     } 
 
@@ -17,25 +20,20 @@
     // let isLoading = false; 
 
     async function uploadImages(evt) {
-        const id = getUserId()
+        const accessToken = getTokenFromLocalStorage()
 
-        //evt.preventDefault()
 
-        // Start the spinner
-        // statusSpinner.set(true);
-        // isLoading = true;
-        console.log(1)
+       
         const [fileName, fileUrl] = await uploadMedia(evt.target['file'].files[0]);
-        const accessToken = getTokenFromLocalStorage();
         const imageData = {
-            id: id,
             title: evt.target['title'].value,
             description: evt.target['description'].value,
             price: evt.target['price'].value,   
             url: fileUrl,
         };
 
-        const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/item', {
+      
+        const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/images', {
         method: 'POST',
         mode: 'cors',
         headers: {
@@ -45,11 +43,13 @@
         body: JSON.stringify(imageData)
       });
   
+      
       if (resp.status == 200) {
         postSignUp();
       } else {
       const res = await resp.json();
       if (res.error)
+      console.log(res.error)
       formErrors = res.error;
     }
 }
@@ -58,9 +58,7 @@
 
 </script>
 
-<svelte:head>
-  <script src="/aws-sdk-s3.min.js"></script>
-</svelte:head>
+
 
 <h1 class="text-center text-3xl font-bold">Sell Your Items</h1>
 
