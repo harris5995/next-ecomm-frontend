@@ -1,30 +1,41 @@
-// This example sets up an endpoint using the Express framework.
-// Watch this video to get started: https://youtu.be/rPR2aJ6XnAc.
+import express from 'express'
+import { Prisma } from "@prisma/client"
+import prisma from "../utils/prisma.js"
+import Stripe from 'stripe';
+const stripe = new Stripe('sk_test_51Np0BPIBrBC1A34W3YVjxuengAgvCwZjUVdPkJ7wH3WA0QY3v63nluatrGaq6fVaRhPSHSOKjQlPW3C3E5JwgMBF008Mhe5jRy');
+// # See your keys here: https://dashboard.stripe.com/apikeys
 
-const express = require('express');
-const app = express();
-const stripe = require('stripe')('sk_test_51Np0BPIBrBC1A34W3YVjxuengAgvCwZjUVdPkJ7wH3WA0QY3v63nluatrGaq6fVaRhPSHSOKjQlPW3C3E5JwgMBF008Mhe5jRy')
+const router = express.Router()
 
-app.post('/create-checkout-session', async (req, res) => {
+// const customer = await stripe.customers.create({
+//   email: 'customer@example.com',
+// });
+
+router.post('/', async (req, res) => {
+
+  // make router so that it gets single image data instead of all
   const session = await stripe.checkout.sessions.create({
     line_items: [
       {
         price_data: {
           currency: 'usd',
           product_data: {
-            name: 'T-shirt',
+            name: req.image.title,
+            description: req.image.description,
+            images: [req.image.url]
           },
-          unit_amount: 2000,
+          unit_amount: (req.image.price*100),
         },
         quantity: 1,
       },
     ],
     mode: 'payment',
-    success_url: '/',
-    cancel_url: '/',
+    success_url: 'http://127.0.0.1:5173/payment/success',
+    cancel_url: 'http://127.0.0.1:5173/payment/cancel',
   });
 
-  res.redirect(303, session.url);
+  return res.json(session.url)
 });
 
-app.listen(8080, () => console.log(`Listening on port ${8080}!`));
+
+export default router
