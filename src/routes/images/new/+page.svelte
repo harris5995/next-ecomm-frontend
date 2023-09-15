@@ -68,7 +68,7 @@
             <label class="label" for="title">
                 <span class="label-text">Title</span>
             </label>
-            <input type="text" name="title" placeholder="Maggi" class="input input-bordered w-full" required />
+            <input type="text" name="title" placeholder="Sunset" class="input input-bordered w-full" required />
             {#if 'title' in formErrors}
             <label class="label" for="title">
                 <span class="label-text-alt text-red-500">{formErrors['title'].message}</span>
@@ -92,7 +92,7 @@
             <label class="label" for="description">
                 <span class="label-text">Description</span>
             </label>
-            <input type="input" name="description" placeholder="Delicious" class="input input-bordered w-full" required />
+            <input type="input" name="description" placeholder="Kuala Lumpur, Malaysia" class="input input-bordered w-full" required />
             {#if 'description' in formErrors}
             <label class="label" for="description">
                 <span class="label-text-alt text-red-500">{formErrors['description'].message}</span>
