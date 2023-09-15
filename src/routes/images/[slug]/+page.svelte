@@ -33,6 +33,30 @@
         // }
     }
 
+    async function checkout() {
+        const accessToken = getTokenFromLocalStorage()
+        const resp = await fetch(PUBLIC_BACKEND_BASE_URL + '/', {
+            method: 'POST',
+        mode: 'cors',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${accessToken}`
+        },
+        body: JSON.stringify(imageData)
+      });
+
+      if (resp.status == 200) {
+        window.location.replace(
+        "",
+        );
+      } else {
+        const res = await resp.json();
+        if (res.error)
+        console.log(res.error)
+        formErrors = res.error;
+    }
+    }
+
 </script>
 
 {#if $LoggedIn && getUserId() == data.images.user_id}
@@ -52,6 +76,12 @@
                 <img class="max-w-xs max-h-xs mx-auto mb-2" src={data.images.url} alt={data.images.url} />
                 <p>{data.images.description}</p>
                 <p>Price: ${data.images.price}</p>
+                <!-- Checkout button below -->
+                <form action="/" method="POST">
+                    <button on:click={checkout} data-title={data.images.title} data-price={data.images.price} data-descripiton={data.images.descripiton} class="btn" >Checkout</button>
+                  </form>
             </div>
 
     </div>
+
+
